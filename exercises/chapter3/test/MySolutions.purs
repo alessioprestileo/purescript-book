@@ -1,5 +1,11 @@
 module Test.MySolutions where
 
 import Prelude
+import Data.AddressBook (Entry, AddressBook)
+import Data.List (filter, head)
+import Data.Maybe (Maybe)
 
--- Note to reader: Add your solutions to this file
+findEntryByStreet:: String -> AddressBook -> Maybe Entry
+findEntryByStreet street = head <<< filter filterStreet where
+  filterStreet :: Entry -> Boolean
+  filterStreet entry = entry.address.street == street
