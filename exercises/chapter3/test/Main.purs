@@ -5,7 +5,7 @@ import Prelude
 import Data.AddressBook (AddressBook, Entry, emptyBook, findEntry, insertEntry)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
-import Test.MySolutions (findEntryByStreet, isInBook)
+import Test.MySolutions (findEntryByStreet, isInBook, removeDuplicates)
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert as Assert
 import Test.Unit.Main (runTest)
@@ -74,11 +74,12 @@ main =
       test "Check missing" do
         Assert.equal false
           $ isInBook "unknown" "person" book
-    {-  Move this block comment starting point to enable more tests
     suite "Exercise - removeDuplicates" do
-      Assert.equal book
-        $ removeDuplicates bookWithDuplicate
+      test "Remove duplicates" do
+        Assert.equal book
+          $ removeDuplicates bookWithDuplicate
 
+{-  Move this block comment starting point to enable more tests
 -}
 runChapterExamples :: TestSuite
 runChapterExamples = do
