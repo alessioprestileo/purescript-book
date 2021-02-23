@@ -18,8 +18,7 @@ isInBook firstName lastName book = case found of
   Nothing -> false
   where found = findEntry firstName lastName book
 
-isDuplicateAddress :: Entry -> Entry -> Boolean
-isDuplicateAddress first second = (first.firstName == second.firstName) && (first.lastName == second.lastName)
-
 removeDuplicates :: AddressBook -> AddressBook
-removeDuplicates addressBook = nubBy isDuplicateAddress addressBook
+removeDuplicates = nubBy isDuplicateEntry where
+  isDuplicateEntry :: Entry -> Entry -> Boolean
+  isDuplicateEntry first second = (first.firstName == second.firstName) && (first.lastName == second.lastName)
