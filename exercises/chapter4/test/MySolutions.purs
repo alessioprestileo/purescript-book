@@ -2,8 +2,9 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array (head, tail, filter)
+import Data.Array (head, tail, filter, length)
 import Data.Maybe (fromMaybe)
+import Test.Examples (factors)
 
 infix 4 filter as <$?>
 
@@ -38,3 +39,6 @@ keepNonNegative = filter (_ >= 0.0)
 
 keepNonNegativeRewrite :: Array Number -> Array Number
 keepNonNegativeRewrite xs = (_ >= 0.0) <$?> xs
+
+isPrime :: Int -> Boolean
+isPrime n = n > 1 && length (factors n) == 1
