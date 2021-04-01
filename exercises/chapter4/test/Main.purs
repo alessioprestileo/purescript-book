@@ -55,7 +55,6 @@ main =
         test "Filter negative numbers" do
           Assert.equal [ 0.0, 2.0, 3.0 ]
             $ keepNonNegative [ -1.5, -1.0, 0.0, -0.1, 2.0, 3.0, -4.0 ]
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - <$?> infix operator for filter" do
         test "Define <$?> operator for filter" do
           Assert.equal [ 1, 1 ]
@@ -64,6 +63,7 @@ main =
         test "keepNonNegativeRewrite " do
           Assert.equal [ 0.0, 2.0, 3.0 ]
             $ keepNonNegativeRewrite [ -1.5, -1.0, 0.0, -0.1, 2.0, 3.0, -4.0 ]
+    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Flattening, Comprehensions, Do Notation, and Guards" do
       test "Exercise - isPrime" do
         assertFalse "0 is not prime"

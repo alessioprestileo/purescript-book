@@ -5,6 +5,8 @@ import Prelude
 import Data.Array (head, tail, filter)
 import Data.Maybe (fromMaybe)
 
+infix 4 filter as <$?>
+
 isEven :: Int -> Boolean
 isEven n = case n of
   0 -> true
@@ -33,3 +35,6 @@ squared = map (\n -> n * n)
 
 keepNonNegative :: Array Number -> Array Number
 keepNonNegative = filter (_ >= 0.0)
+
+keepNonNegativeRewrite :: Array Number -> Array Number
+keepNonNegativeRewrite xs = (_ >= 0.0) <$?> xs
