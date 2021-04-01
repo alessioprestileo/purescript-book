@@ -27,3 +27,6 @@ countEven ints = safelyCountEven ints 0
     increment = oneIfEven $ safeHead ints'
     safeHead :: Array Int -> Int
     safeHead xs = fromMaybe (-1) $ head xs
+
+squared :: Array Number -> Array Number
+squared = map (\n -> n * n)
