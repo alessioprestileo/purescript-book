@@ -42,3 +42,9 @@ keepNonNegativeRewrite xs = (_ >= 0.0) <$?> xs
 
 isPrime :: Int -> Boolean
 isPrime n = n > 1 && length (factors n) == 1
+
+cartesianProduct :: ∀ a. Array a -> Array a -> Array (Array a)
+cartesianProduct xs ys = do
+  i <- xs
+  j <- ys
+  pure [i, j]
