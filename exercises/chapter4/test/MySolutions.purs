@@ -2,7 +2,7 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array (head, tail)
+import Data.Array (head, tail, filter)
 import Data.Maybe (fromMaybe)
 
 isEven :: Int -> Boolean
@@ -30,3 +30,6 @@ countEven ints = safelyCountEven ints 0
 
 squared :: Array Number -> Array Number
 squared = map (\n -> n * n)
+
+keepNonNegative :: Array Number -> Array Number
+keepNonNegative = filter (_ >= 0.0)
