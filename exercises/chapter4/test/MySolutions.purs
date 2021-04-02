@@ -2,7 +2,8 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array (head, tail, filter, length)
+import Control.MonadZero (guard)
+import Data.Array (head, tail, filter, length, (..))
 import Data.Maybe (fromMaybe)
 import Test.Examples (factors)
 
@@ -48,3 +49,11 @@ cartesianProduct xs ys = do
   i <- xs
   j <- ys
   pure [i, j]
+
+triples :: Int -> Array (Array Int)
+triples n = do
+  i <- 1 .. n
+  j <- i .. n
+  k <- j .. n
+  guard $ i * i + j * j == k * k
+  pure [i, j, k]
