@@ -3,7 +3,8 @@ module Test.MySolutions where
 import Prelude
 
 import Control.MonadZero (guard)
-import Data.Array (head, tail, filter, length, (..))
+import Data.Array (cons, filter, head, length, tail, (..))
+import Data.Int (quot, rem)
 import Data.Maybe (fromMaybe)
 import Test.Examples (factors)
 
@@ -57,3 +58,18 @@ triples n = do
   k <- j .. n
   guard $ i * i + j * j == k * k
   pure [i, j, k]
+
+factorize :: Int -> Array Int
+factorize 0 = []
+factorize n = factorize' 2 n []
+  where
+  factorize' :: Int -> Int -> Array Int -> Array Int
+  factorize' _ 1 result = result
+  factorize' divisor dividend result =
+    let
+      remainder = rem dividend divisor
+    in
+      if remainder == 0 then
+        factorize' divisor (quot dividend divisor) (cons divisor result)
+      else
+        factorize' (divisor + 1) dividend result

@@ -106,7 +106,6 @@ main =
           Assert.equal (sort [ [ 3, 4, 5 ], [ 5, 12, 13 ], [ 6, 8, 10 ] ])
             $ sort
             $ triples 13
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - factorize" do
         test "Test small non-prime number" do
           Assert.equal [ 3, 2 ]
@@ -114,6 +113,7 @@ main =
         test "Test number that uses the prime numbers less than 10" do
           Assert.equal [ 7, 5, 3, 2 ]
             $ factorize 210
+    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Folds and Tail Recursion" do
       test "Exercise - allTrue" do
         assert "all elements true"
