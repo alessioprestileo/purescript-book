@@ -3,9 +3,10 @@ module Test.MySolutions where
 import Prelude
 
 import Control.MonadZero (guard)
-import Data.Array (cons, filter, head, length, tail, (..))
+import Data.Array (cons, filter, foldl, head, length, tail, (..))
 import Data.Int (quot, rem)
 import Data.Maybe (fromMaybe)
+import Prim.Boolean (True)
 import Test.Examples (factors)
 
 infix 4 filter as <$?>
@@ -73,3 +74,6 @@ factorize n = factorize' 2 n []
         factorize' divisor (quot dividend divisor) (cons divisor result)
       else
         factorize' (divisor + 1) dividend result
+
+allTrue ::  Array Boolean -> Boolean
+allTrue = foldl (\acc bool -> acc && bool) true
