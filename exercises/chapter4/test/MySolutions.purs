@@ -3,11 +3,11 @@ module Test.MySolutions where
 import Prelude
 
 import Control.MonadZero (guard)
-import Data.Array (cons, filter, foldl, head, length, tail, (..))
+import Data.Array (cons, filter, foldl, head, length, tail, (..), (:))
 import Data.Array.NonEmpty (elemLastIndex)
 import Data.Int (quot, rem)
 import Data.Maybe (fromMaybe)
-import Prim.Boolean (True)
+import Data.Path (Path(..), isDirectory, ls)
 import Test.Examples (factors)
 
 infix 4 filter as <$?>
@@ -91,3 +91,11 @@ fibTailRec n = fib' n 0 0 1
 
 reverse :: forall a. Array a -> Array a
 reverse = foldl (\acc x -> [x] <> acc) []
+
+allPaths :: Path -> Array Path
+allPaths path = path : do
+  child <- ls path
+  allPaths child
+
+onlyFiles :: Path -> Array Path
+onlyFiles path = filter (not isDirectory) (allPaths path)
