@@ -3,11 +3,12 @@ module Test.MySolutions where
 import Prelude
 
 import Control.MonadZero (guard)
-import Data.Array (cons, filter, foldl, head, last, length, tail, (..), (:))
+import Data.Array (catMaybes, cons, filter, find, foldl, head, last, length, tail, (..), (:))
 import Data.Array.NonEmpty (elemLastIndex)
+import Data.Foldable (maximum, minimum)
 import Data.Int (quot, rem)
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Path (Path(..), filename, isDirectory, ls)
+import Data.Path (Path(..), filename, isDirectory, ls, size)
 import Data.String (split)
 import Data.String.Pattern (Pattern(..))
 import Test.Examples (factors)
@@ -111,3 +112,33 @@ whereIs dir fName = head $ whereIs' $ allPaths dir
     child <- ls path
     guard $ eq fName $ fromMaybe "" $ last $ split (Pattern "/") $ filename child
     pure path
+
+largestSmallest :: Path -> Array Path
+largestSmallest dir = if not (isDirectory dir) then 
+  [] else
+  let
+    files = onlyFiles dir
+    allSizes = catMaybes $ map size files
+    maxSize = maximum allSizes
+    minSize = minimum allSizes
+    findFileBySize :: Array Path -> Int -> Maybe Path
+    findFileBySize filesList targetSize = find (\file -> size file == (Just targetSize)) filesList
+  in
+  case minSize, maxSize of
+    Nothing, Nothing -> []
+    Nothing, Just maxS -> 
+      case (findFileBySize files maxS) of
+      Nothing -> []
+      Just file -> [file]
+    Just minS, Nothing -> 
+      case (findFileBySize files minS) of
+      Nothing -> []
+      Just file -> [file]
+    Just minS, Just maxS  -> 
+      case (findFileBySize files minS), (findFileBySize files maxS) of
+      Nothing, Nothing -> []
+      Just minFile, Nothing -> [minFile]
+      Nothing, Just maxFile -> [maxFile]
+      Just minFile, Just maxFile -> if size minFile == size maxFile
+      then [minFile]
+      else [minFile, maxFile]
