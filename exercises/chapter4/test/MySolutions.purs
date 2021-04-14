@@ -3,11 +3,13 @@ module Test.MySolutions where
 import Prelude
 
 import Control.MonadZero (guard)
-import Data.Array (cons, filter, foldl, head, length, tail, (..), (:))
+import Data.Array (cons, filter, foldl, head, last, length, tail, (..), (:))
 import Data.Array.NonEmpty (elemLastIndex)
 import Data.Int (quot, rem)
-import Data.Maybe (fromMaybe)
-import Data.Path (Path(..), isDirectory, ls)
+import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Path (Path(..), filename, isDirectory, ls)
+import Data.String (split)
+import Data.String.Pattern (Pattern(..))
 import Test.Examples (factors)
 
 infix 4 filter as <$?>
@@ -99,3 +101,13 @@ allPaths path = path : do
 
 onlyFiles :: Path -> Array Path
 onlyFiles path = filter (not isDirectory) (allPaths path)
+
+whereIs :: Path -> String -> Maybe Path
+whereIs dir fName = head $ whereIs' $ allPaths dir
+  where
+  whereIs' :: Array Path -> Array Path
+  whereIs' paths = do
+    path <- paths
+    child <- ls path
+    guard $ eq fName $ fromMaybe "" $ last $ split (Pattern "/") $ filename child
+    pure path
