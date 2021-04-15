@@ -6,6 +6,7 @@ import ChapterExamples (Amp(..), Volt(..))
 import Data.Maybe (Maybe(..))
 import Data.Person (Person)
 import Data.Picture (Shape(..), Point, getCenter, origin)
+import Math as Math
 
 factorial :: Int -> Int
 factorial n | n == 0 = 1
@@ -61,3 +62,8 @@ newtype Watt = Watt Number
 
 calculateWattage :: Amp -> Volt -> Watt
 calculateWattage (Amp a) (Volt v) = Watt (a * v)
+
+area :: Shape -> Number
+area (Circle _ r) = Math.pi * (Math.pow r 2.0)
+area (Rectangle _ w h) = w * h
+area _ = 0.0
