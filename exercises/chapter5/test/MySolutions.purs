@@ -3,7 +3,7 @@ module Test.MySolutions where
 import Prelude
 
 import Data.Person (Person)
-import Data.Picture (Shape(..), origin)
+import Data.Picture (Shape(..), Point, getCenter, origin)
 
 factorial :: Int -> Int
 factorial n | n == 0 = 1
@@ -29,3 +29,24 @@ fromSingleton default _ = default
 
 circleAtOrigin :: Shape
 circleAtOrigin = Circle origin 10.0
+
+centerShape :: Shape-> Shape
+centerShape (Circle c r) = Circle origin r
+centerShape (Rectangle center width height) = Rectangle origin width height
+centerShape line@(Line p1 p2) = let
+  delta = getCenter line in
+  Line (p1 - delta) (p2 - delta)
+centerShape (Text center str) = Text origin str
+
+scaleShape :: Number -> Shape -> Shape
+scaleShape n (Circle c r) = Circle c (r * n)
+scaleShape n (Rectangle c w h) = Rectangle c (w * n) (h * n)
+scaleShape n (Line p1 p2) = let
+  scale :: Point
+  scale = {x: n, y: n}
+  in
+  Line (p1 * scale) (p2 * scale)
+scaleShape n text = text
+
+doubleScaleAndCenter :: Shape -> Shape
+doubleScaleAndCenter = centerShape <<< scaleShape 2.0
