@@ -5,7 +5,7 @@ import Prelude
 import ChapterExamples (Amp(..), Volt(..))
 import Data.Maybe (Maybe(..))
 import Data.Person (Person)
-import Data.Picture (Shape(..), Point, getCenter, origin)
+import Data.Picture (Bounds, Picture, Point, Shape(..), bounds, getCenter, intersect, origin, shapeBounds) as DP
 import Math as Math
 
 factorial :: Int -> Int
@@ -30,32 +30,32 @@ fromSingleton :: forall a. a -> Array a -> a
 fromSingleton default [val] = val
 fromSingleton default _ = default
 
-circleAtOrigin :: Shape
-circleAtOrigin = Circle origin 10.0
+circleAtOrigin :: DP.Shape
+circleAtOrigin = DP.Circle DP.origin  10.0
 
-centerShape :: Shape-> Shape
-centerShape (Circle c r) = Circle origin r
-centerShape (Rectangle center width height) = Rectangle origin width height
-centerShape line@(Line p1 p2) = let
-  delta = getCenter line in
-  Line (p1 - delta) (p2 - delta)
-centerShape (Text center str) = Text origin str
+centerShape :: DP.Shape -> DP.Shape
+centerShape (DP.Circle c r) = DP.Circle DP.origin  r
+centerShape (DP.Rectangle center width height) = DP.Rectangle DP.origin  width height
+centerShape line@(DP.Line p1 p2) = let
+  delta = DP.getCenter line in
+  DP.Line (p1 - delta) (p2 - delta)
+centerShape (DP.Text center str) = DP.Text DP.origin  str
 
-scaleShape :: Number -> Shape -> Shape
-scaleShape n (Circle c r) = Circle c (r * n)
-scaleShape n (Rectangle c w h) = Rectangle c (w * n) (h * n)
-scaleShape n (Line p1 p2) = let
-  scale :: Point
+scaleShape :: Number -> DP.Shape -> DP.Shape
+scaleShape n (DP.Circle c r) = DP.Circle c (r * n)
+scaleShape n (DP.Rectangle c w h) = DP.Rectangle c (w * n) (h * n)
+scaleShape n (DP.Line p1 p2) = let
+  scale :: DP.Point 
   scale = {x: n, y: n}
   in
-  Line (p1 * scale) (p2 * scale)
+  DP.Line (p1 * scale) (p2 * scale)
 scaleShape n text = text
 
-doubleScaleAndCenter :: Shape -> Shape
+doubleScaleAndCenter :: DP.Shape -> DP.Shape
 doubleScaleAndCenter = centerShape <<< scaleShape 2.0
 
-shapeText :: Shape -> Maybe String
-shapeText (Text c str) = Just str
+shapeText :: DP.Shape -> Maybe String
+shapeText (DP.Text c str) = Just str
 shapeText _ = Nothing
 
 newtype Watt = Watt Number
@@ -63,7 +63,13 @@ newtype Watt = Watt Number
 calculateWattage :: Amp -> Volt -> Watt
 calculateWattage (Amp a) (Volt v) = Watt (a * v)
 
-area :: Shape -> Number
-area (Circle _ r) = Math.pi * (Math.pow r 2.0)
-area (Rectangle _ w h) = w * h
+area :: DP.Shape -> Number
+area (DP.Circle _ r) = Math.pi * (Math.pow r 2.0)
+area (DP.Rectangle _ w h) = w * h
 area _ = 0.0
+
+data ShapeExt = Shape DP.Shape | Clipped DP.Picture DP.Point Number Number
+
+shapeBounds :: ShapeExt -> DP.Bounds
+shapeBounds (Shape shape) = DP.shapeBounds shape
+shapeBounds (Clipped pic c w h) = DP.intersect (DP.bounds pic) $ DP.shapeBounds (DP.Rectangle c w h)
