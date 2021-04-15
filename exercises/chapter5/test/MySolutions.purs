@@ -2,6 +2,7 @@ module Test.MySolutions where
 
 import Prelude
 
+import ChapterExamples (Amp(..), Volt(..))
 import Data.Maybe (Maybe(..))
 import Data.Person (Person)
 import Data.Picture (Shape(..), Point, getCenter, origin)
@@ -55,3 +56,8 @@ doubleScaleAndCenter = centerShape <<< scaleShape 2.0
 shapeText :: Shape -> Maybe String
 shapeText (Text c str) = Just str
 shapeText _ = Nothing
+
+newtype Watt = Watt Number
+
+calculateWattage :: Amp -> Volt -> Watt
+calculateWattage (Amp a) (Volt v) = Watt (a * v)
