@@ -16,12 +16,12 @@ main :: Effect Unit
 main =
   runTest do
     runChapterExamples
-    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Show Me" do
       test "Exercise - Show Point" do
         Assert.equal "(1.0, 2.0)"
           $ show
           $ Point {x: 1.0, y: 2.0}
+    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Common Type Classes" do
       let cpx real imaginary = Complex {real, imaginary}
       suite "Exercise - Show Complex" do
