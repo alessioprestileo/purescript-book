@@ -23,3 +23,5 @@ instance showComplex :: Show Complex where
         | otherwise = ""
     in
       show real <> optionalPlus <> show imaginary <> "i"
+
+derive instance eqComplex :: Eq Complex
