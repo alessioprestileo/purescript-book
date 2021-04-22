@@ -54,3 +54,12 @@ derive instance genericShape :: Generic Shape _
 
 instance showShape :: Show Shape where
   show = genericShow
+
+data NonEmpty a = NonEmpty a (Array a)
+
+derive instance genericNonEmpty :: Generic (NonEmpty a) _
+
+instance showNonEmpty :: (Show a) => Show (NonEmpty a) where
+  show = genericShow
+
+derive instance eqNonEmpty :: (Eq a) => Eq (NonEmpty a)

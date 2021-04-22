@@ -64,7 +64,6 @@ main =
         test "text" do
           Assert.equal "(Text (1.0, 2.0) \"Hello\")"
             $ show $ Text (Point {x: 1.0, y: 2.0}) "Hello"
-    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Constraints and Dependencies" do
       suite "Exercise - Eq for NonEmpty" do
         test "NonEmpty equals" do
@@ -74,6 +73,7 @@ main =
           Assert.expectFailure "should not be equal"
             $ Assert.equal (NonEmpty 1 [ 2, 3 ])
             $ NonEmpty 2 [ 2, 3 ]
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Semigroup for NonEmpty" do
         test "NonEmpty append" do
           Assert.equal (NonEmpty 1 [ 2, 3, 4, 5, 6 ])
