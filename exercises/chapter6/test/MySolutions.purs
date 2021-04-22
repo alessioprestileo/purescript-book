@@ -38,3 +38,5 @@ instance semiringComplex :: Semiring Complex where
     ->
       { real: r1 * r2 - i1 * i2, imaginary: r1 * i2 + i1 * r2}
   one = wrap one
+
+derive newtype instance ringComplex :: Ring Complex
