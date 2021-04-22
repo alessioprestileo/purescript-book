@@ -51,7 +51,6 @@ main =
         test "subtract" do
           Assert.equal (cpx 2.0 3.0)
             $ sub (cpx 3.0 5.0) (cpx 1.0 2.0)
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Show Shape" do
         test "circle" do
           Assert.equal "(Circle (1.0, 2.0) 3.0)"
@@ -65,6 +64,7 @@ main =
         test "text" do
           Assert.equal "(Text (1.0, 2.0) \"Hello\")"
             $ show $ Text (Point {x: 1.0, y: 2.0}) "Hello"
+    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Constraints and Dependencies" do
       suite "Exercise - Eq for NonEmpty" do
         test "NonEmpty equals" do

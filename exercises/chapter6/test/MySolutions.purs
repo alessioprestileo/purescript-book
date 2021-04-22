@@ -2,6 +2,8 @@ module Test.MySolutions where
 
 import Prelude
 
+import Data.Generic.Rep (class Generic)
+import Data.Generic.Rep.Show (genericShow)
 import Data.Newtype (class Newtype, over2, wrap)
 
 newtype Point = Point
@@ -40,3 +42,15 @@ instance semiringComplex :: Semiring Complex where
   one = wrap one
 
 derive newtype instance ringComplex :: Ring Complex
+
+data Shape
+  = Circle Point Number
+  | Rectangle Point Number Number
+  | Line Point Point
+  | Text Point String
+
+
+derive instance genericShape :: Generic Shape _
+
+instance showShape :: Show Shape where
+  show = genericShow
