@@ -78,12 +78,12 @@ main =
           Assert.equal (NonEmpty 1 [ 2, 3, 4, 5, 6 ])
             $ NonEmpty 1 [ 2, 3 ]
             <> NonEmpty 4 [ 5, 6 ]
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Functor for NonEmpty" do
         test "NonEmpty append" do
           Assert.equal (NonEmpty 10 [ 20, 30 ])
             $ map (_ * 10)
             $ NonEmpty 1 [ 2, 3 ]
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Ord for Extended" do
         -- Type annotation necessary to ensure there is an Ord instance for inner type (Int in this case)
         test "Extended compare inf inf" do

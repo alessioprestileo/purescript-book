@@ -66,3 +66,6 @@ derive instance eqNonEmpty :: (Eq a) => Eq (NonEmpty a)
 
 instance semigroupNonEmpty :: Semigroup (NonEmpty a) where
   append (NonEmpty e1 a1) (NonEmpty e2 a2) = NonEmpty e1 (a1 <> [e2] <> a2)
+
+instance functorNonEmpty :: Functor NonEmpty where
+  map fn (NonEmpty e a) = NonEmpty (fn e) (map fn a)
