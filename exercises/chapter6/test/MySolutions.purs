@@ -69,3 +69,14 @@ instance semigroupNonEmpty :: Semigroup (NonEmpty a) where
 
 instance functorNonEmpty :: Functor NonEmpty where
   map fn (NonEmpty e a) = NonEmpty (fn e) (map fn a)
+
+data Extended a = Infinite | Finite a
+
+derive instance eqExtended :: Eq a => Eq (Extended a)
+
+instance ordExtended :: Ord a => Ord (Extended a) where
+  compare Infinite Infinite = EQ
+  compare Infinite _ = GT
+  compare _ Infinite = LT
+  compare (Finite a1) (Finite a2) = compare a1 a2
+
