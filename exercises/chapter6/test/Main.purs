@@ -73,12 +73,12 @@ main =
           Assert.expectFailure "should not be equal"
             $ Assert.equal (NonEmpty 1 [ 2, 3 ])
             $ NonEmpty 2 [ 2, 3 ]
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Semigroup for NonEmpty" do
         test "NonEmpty append" do
           Assert.equal (NonEmpty 1 [ 2, 3, 4, 5, 6 ])
             $ NonEmpty 1 [ 2, 3 ]
             <> NonEmpty 4 [ 5, 6 ]
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Functor for NonEmpty" do
         test "NonEmpty append" do
           Assert.equal (NonEmpty 10 [ 20, 30 ])
