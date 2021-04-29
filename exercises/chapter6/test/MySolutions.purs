@@ -82,8 +82,6 @@ instance ordExtended :: Ord a => Ord (Extended a) where
   compare (Finite a1) (Finite a2) = compare a1 a2
 
 instance foldableNonEmpty :: Foldable NonEmpty where
-  foldr fn start (NonEmpty elem array) = foldr fn start ([ elem ] <> array)
+  foldr fn start (NonEmpty elem array) = fn elem (foldr fn start array)
   foldl fn start (NonEmpty elem array) = foldl fn (fn start elem) array
   foldMap fn (NonEmpty elem array) = foldMap fn ([ elem ] <> array)
-  
-
