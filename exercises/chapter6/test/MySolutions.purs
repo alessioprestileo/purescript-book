@@ -84,4 +84,11 @@ instance ordExtended :: Ord a => Ord (Extended a) where
 instance foldableNonEmpty :: Foldable NonEmpty where
   foldr fn start (NonEmpty elem array) = fn elem (foldr fn start array)
   foldl fn start (NonEmpty elem array) = foldl fn (fn start elem) array
-  foldMap fn (NonEmpty elem array) = foldMap fn ([ elem ] <> array)
+  foldMap fn (NonEmpty elem array) = (fn elem) <> foldMap fn array
+  
+data OneMore f a = OneMore a (f a)
+
+instance foldableOneMore :: (Foldable f) => Foldable (OneMore f) where
+  foldr fn start (OneMore val more) = fn val (foldr fn start more)
+  foldl fn start (OneMore val more) = foldl fn (fn start val) more
+  foldMap fn (OneMore val more) = (fn val) <> foldMap fn more
