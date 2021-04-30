@@ -133,7 +133,6 @@ main =
           Assert.equal "123"
             $ foldMap (\x -> show x)
             $ OneMore 1 (2 : 3 : Nil)
-    {-  Move this block comment starting point to enable more tests
       let
         withDups =
           [ Circle (Point {x: 1.0, y: 2.0}) 3.0
@@ -149,6 +148,7 @@ main =
       test "Exercise - dedupShapes" do
         Assert.equal noDups
           $ dedupShapes withDups
+    {-  Move this block comment starting point to enable more tests
       test "Exercise - dedupShapesFast" do
         Assert.equal noDups
           $ dedupShapesFast withDups

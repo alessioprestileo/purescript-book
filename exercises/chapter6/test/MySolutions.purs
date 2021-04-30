@@ -2,6 +2,7 @@ module Test.MySolutions where
 
 import Prelude
 
+import Data.Array (nubEq)
 import Data.Foldable (class Foldable, foldMap, foldl, foldr)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
@@ -92,3 +93,9 @@ instance foldableOneMore :: (Foldable f) => Foldable (OneMore f) where
   foldr fn start (OneMore val more) = fn val (foldr fn start more)
   foldl fn start (OneMore val more) = foldl fn (fn start val) more
   foldMap fn (OneMore val more) = (fn val) <> foldMap fn more
+
+derive instance eqPoint :: Eq Point
+derive instance eqShape :: Eq Shape
+
+dedupShapes :: Array Shape -> Array Shape
+dedupShapes = nubEq
