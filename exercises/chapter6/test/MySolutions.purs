@@ -2,7 +2,7 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array (nubEq)
+import Data.Array (nub, nubEq)
 import Data.Foldable (class Foldable, foldMap, foldl, foldr)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
@@ -99,3 +99,9 @@ derive instance eqShape :: Eq Shape
 
 dedupShapes :: Array Shape -> Array Shape
 dedupShapes = nubEq
+
+derive instance ordPoint :: Ord Point
+derive instance ordShape :: Ord Shape
+
+dedupShapesFast :: Array Shape -> Array Shape
+dedupShapesFast = nub
