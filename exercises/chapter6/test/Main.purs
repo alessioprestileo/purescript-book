@@ -216,7 +216,6 @@ main =
               , "bazbazbaz"
               ]
               $ act m1 a
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Action Class - actionSelf instance" do
         let
           a = Self m1
@@ -229,6 +228,7 @@ main =
         test "Multiply Self concrete" do
           Assert.equal (Self (Multiply 12))
             $ act m2 a
+    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Hashes" do
       suite "Exercise - arrayHasDuplicates" do
         test "No dupe" do

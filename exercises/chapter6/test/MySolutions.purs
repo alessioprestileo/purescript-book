@@ -136,5 +136,10 @@ instance actionArray :: Action m a => Action m (Array a) where
 
 newtype Self m = Self m
 
+derive newtype instance showMultiply :: Show Multiply
+derive newtype instance eqMultiply :: Eq Multiply
+derive newtype instance showSelf :: Show a => Show (Self a)
+derive newtype instance eqSelf :: Eq a => Eq (Self a)
+
 instance actionSelf :: Monoid m => Action m (Self m) where
   act m1 (Self m2) = Self (m1 <> m2)
