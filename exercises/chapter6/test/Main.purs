@@ -156,7 +156,6 @@ main =
         Assert.equal 42
           $ unsafePartial
           $ unsafeMaximum [ 1, 2, 42, 3 ]
-    {-  Move this block comment starting point to enable more tests
       let
         m1 = Multiply 3
 
@@ -175,6 +174,7 @@ main =
           test "Multiply Int concrete" do
             Assert.equal 15
               $ act m1 a
+    {-  Move this block comment starting point to enable more tests
         -- Multiply String is the actual exercise question
         suite "Multiply String" do
           let
