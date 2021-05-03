@@ -7,6 +7,7 @@ import Data.Foldable (class Foldable, foldMap, foldl, foldr, maximum)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.Maybe (Maybe(..))
+import Data.Monoid (power)
 import Data.Newtype (class Newtype, over2, overF, wrap)
 
 newtype Point = Point
@@ -124,3 +125,8 @@ instance monoidMultiply :: Monoid Multiply where
 
 instance actionMultiplyInt :: Action Multiply Int where
   act (Multiply n) k = n * k
+
+
+instance actionMultiplyString :: Action Multiply String where
+  act (Multiply n) s = power s n
+

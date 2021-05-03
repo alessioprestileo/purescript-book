@@ -174,7 +174,6 @@ main =
           test "Multiply Int concrete" do
             Assert.equal 15
               $ act m1 a
-    {-  Move this block comment starting point to enable more tests
         -- Multiply String is the actual exercise question
         suite "Multiply String" do
           let
@@ -188,6 +187,7 @@ main =
           test "Multiply String concrete" do
             Assert.equal "foofoofoo"
               $ act m1 a
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Action Class - actionArray instance" do
         suite "Multiply Array Int" do
           let
