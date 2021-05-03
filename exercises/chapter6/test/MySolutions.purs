@@ -133,3 +133,8 @@ instance actionMultiplyString :: Action Multiply String where
 
 instance actionArray :: Action m a => Action m (Array a) where
   act m xs = map (act m) xs
+
+newtype Self m = Self m
+
+instance actionSelf :: Monoid m => Action m (Self m) where
+  act m1 (Self m2) = Self (m1 <> m2)
