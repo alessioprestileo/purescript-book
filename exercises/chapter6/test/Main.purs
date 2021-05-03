@@ -151,12 +151,12 @@ main =
       test "Exercise - dedupShapesFast" do
         Assert.equal noDups
           $ dedupShapesFast withDups
-    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - More or less than one Type argument" do
       test "Exercise - unsafeMaximum" do
         Assert.equal 42
           $ unsafePartial
           $ unsafeMaximum [ 1, 2, 42, 3 ]
+    {-  Move this block comment starting point to enable more tests
       let
         m1 = Multiply 3
 

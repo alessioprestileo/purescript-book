@@ -3,10 +3,11 @@ module Test.MySolutions where
 import Prelude
 
 import Data.Array (nub, nubEq)
-import Data.Foldable (class Foldable, foldMap, foldl, foldr)
+import Data.Foldable (class Foldable, foldMap, foldl, foldr, maximum)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
-import Data.Newtype (class Newtype, over2, wrap)
+import Data.Maybe (Maybe(..))
+import Data.Newtype (class Newtype, over2, overF, wrap)
 
 newtype Point = Point
   { x :: Number
@@ -105,3 +106,7 @@ derive instance ordShape :: Ord Shape
 
 dedupShapesFast :: Array Shape -> Array Shape
 dedupShapesFast = nub
+
+unsafeMaximum :: Partial => Array Int -> Int
+unsafeMaximum xs = case maximum xs of
+  Just m -> m
