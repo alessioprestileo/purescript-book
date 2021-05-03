@@ -187,7 +187,6 @@ main =
           test "Multiply String concrete" do
             Assert.equal "foofoofoo"
               $ act m1 a
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Action Class - actionArray instance" do
         suite "Multiply Array Int" do
           let
@@ -217,6 +216,7 @@ main =
               , "bazbazbaz"
               ]
               $ act m1 a
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - Action Class - actionSelf instance" do
         let
           a = Self m1

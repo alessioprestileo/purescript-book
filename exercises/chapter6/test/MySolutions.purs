@@ -130,3 +130,6 @@ instance actionMultiplyInt :: Action Multiply Int where
 instance actionMultiplyString :: Action Multiply String where
   act (Multiply n) s = power s n
 
+
+instance actionArray :: Action m a => Action m (Array a) where
+  act m xs = map (act m) xs
