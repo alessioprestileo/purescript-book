@@ -239,7 +239,6 @@ main =
         test "Only hash dupe" do
           Assert.equal false
             $ arrayHasDuplicates [ 65536, 1, 2, 3 ]
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - hashHour instance" do
         test "Match" do
           Assert.equal (hash $ Hour 1)
@@ -251,6 +250,7 @@ main =
             $ hash
             $ Hour 14
 
+    {-  Move this block comment starting point to enable more tests
 -}
 runChapterExamples :: TestSuite
 runChapterExamples =

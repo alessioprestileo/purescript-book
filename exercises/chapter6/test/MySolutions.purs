@@ -7,7 +7,7 @@ import Data.Foldable (class Foldable, foldMap, foldl, foldr, maximum)
 import Data.Function (on)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
-import Data.Hashable (class Hashable, hashEqual)
+import Data.Hashable (class Hashable, hash, hashEqual)
 import Data.Maybe (Maybe(..))
 import Data.Monoid (power)
 import Data.Newtype (class Newtype, over2, overF, wrap)
@@ -150,3 +150,11 @@ arrayHasDuplicates :: forall a. Hashable a => Array a -> Boolean
 arrayHasDuplicates xs = length xs > length (nubByEq eqCheck xs) where
   eqCheck :: a -> a -> Boolean
   eqCheck a1 a2 = a1 == a2 && hashEqual a1 a2
+
+newtype Hour = Hour Int
+
+instance eqHour :: Eq Hour where
+  eq (Hour n) (Hour m) = mod n 12 == mod m 12
+
+instance hashableHour :: Hashable Hour where
+  hash (Hour n) = hash (mod n 12)
