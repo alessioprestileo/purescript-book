@@ -2,10 +2,12 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array (nub, nubEq)
+import Data.Array (length, nub, nubByEq, nubEq)
 import Data.Foldable (class Foldable, foldMap, foldl, foldr, maximum)
+import Data.Function (on)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
+import Data.Hashable (class Hashable, hashEqual)
 import Data.Maybe (Maybe(..))
 import Data.Monoid (power)
 import Data.Newtype (class Newtype, over2, overF, wrap)
@@ -143,3 +145,8 @@ derive newtype instance eqSelf :: Eq a => Eq (Self a)
 
 instance actionSelf :: Monoid m => Action m (Self m) where
   act m1 (Self m2) = Self (m1 <> m2)
+
+arrayHasDuplicates :: forall a. Hashable a => Array a -> Boolean
+arrayHasDuplicates xs = length xs > length (nubByEq eqCheck xs) where
+  eqCheck :: a -> a -> Boolean
+  eqCheck a1 a2 = a1 == a2 && hashEqual a1 a2

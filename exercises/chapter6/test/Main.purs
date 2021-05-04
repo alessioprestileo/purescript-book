@@ -228,7 +228,6 @@ main =
         test "Multiply Self concrete" do
           Assert.equal (Self (Multiply 12))
             $ act m2 a
-    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Hashes" do
       suite "Exercise - arrayHasDuplicates" do
         test "No dupe" do
@@ -240,6 +239,7 @@ main =
         test "Only hash dupe" do
           Assert.equal false
             $ arrayHasDuplicates [ 65536, 1, 2, 3 ]
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - hashHour instance" do
         test "Match" do
           Assert.equal (hash $ Hour 1)
