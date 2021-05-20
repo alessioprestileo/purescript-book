@@ -3,7 +3,7 @@ module Test.MySolutions where
 import Prelude
 
 import Control.Apply (lift2)
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 
 addMaybe :: forall a. Semiring a => Maybe a -> Maybe a -> Maybe a
 addMaybe = lift2 add
@@ -28,3 +28,7 @@ subApply = lift2 sub
 
 divApply :: forall f a. Apply f => EuclideanRing a => f a -> f a -> f a
 divApply = lift2 div
+
+combineMaybe :: forall a f. Applicative f => Maybe (f a) -> f (Maybe a)
+combineMaybe (Just x) = map Just x
+combineMaybe Nothing = pure Nothing
