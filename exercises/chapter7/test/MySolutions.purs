@@ -5,14 +5,26 @@ import Prelude
 import Control.Apply (lift2)
 import Data.Maybe (Maybe)
 
-addMaybe :: Maybe Int -> Maybe Int -> Maybe Int
-addMaybe n1 n2 = lift2 add n1 n2
+addMaybe :: forall a. Semiring a => Maybe a -> Maybe a -> Maybe a
+addMaybe = lift2 add
 
-subMaybe :: Maybe Int -> Maybe Int -> Maybe Int
-subMaybe n1 n2 = lift2 sub n1 n2
+mulMaybe :: forall a. Semiring a => Maybe a -> Maybe a -> Maybe a
+mulMaybe = lift2 mul
 
-mulMaybe :: Maybe Int -> Maybe Int -> Maybe Int
-mulMaybe n1 n2 = lift2 mul n1 n2
+subMaybe :: forall a. Ring a => Maybe a -> Maybe a -> Maybe a
+subMaybe = lift2 sub
 
-divMaybe :: Maybe Int -> Maybe Int -> Maybe Int
-divMaybe n1 n2 = lift2 div n1 n2
+divMaybe :: forall a. EuclideanRing a => Maybe a -> Maybe a -> Maybe a
+divMaybe = lift2 div
+
+addApply :: forall f a. Apply f => Semiring a => f a -> f a -> f a
+addApply = lift2 add
+
+mulApply :: forall f a. Apply f => Semiring a => f a -> f a -> f a
+mulApply = lift2 mul
+
+subApply :: forall f a. Apply f => Ring a => f a -> f a -> f a
+subApply = lift2 sub
+
+divApply :: forall f a. Apply f => EuclideanRing a => f a -> f a -> f a
+divApply = lift2 div
