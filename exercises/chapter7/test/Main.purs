@@ -95,7 +95,6 @@ main =
           test "Nothing" do
             Assert.equal (Nothing : Nil)
               $ combineMaybe (Nothing :: Maybe (List Char))
-    {-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Applicative Validation" do
       suite "Exercise - stateRegex" do
         let
@@ -106,6 +105,7 @@ main =
         stateTest "C" false
         stateTest "CAA" false
         stateTest "C3" false
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - nonEmptyRegex" do
         let
           nonEmptyTest str exp = test str do

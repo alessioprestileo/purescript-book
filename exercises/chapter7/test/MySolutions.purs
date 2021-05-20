@@ -4,6 +4,9 @@ import Prelude
 
 import Control.Apply (lift2)
 import Data.Maybe (Maybe(..))
+import Data.String.Regex (Regex)
+import Data.String.Regex.Flags (noFlags)
+import Data.String.Regex.Unsafe (unsafeRegex)
 
 addMaybe :: forall a. Semiring a => Maybe a -> Maybe a -> Maybe a
 addMaybe = lift2 add
@@ -32,3 +35,6 @@ divApply = lift2 div
 combineMaybe :: forall a f. Applicative f => Maybe (f a) -> f (Maybe a)
 combineMaybe (Just x) = map Just x
 combineMaybe Nothing = pure Nothing
+
+stateRegex :: Regex
+stateRegex = unsafeRegex "^[a-zA-Z]{2}$" noFlags
