@@ -38,3 +38,6 @@ combineMaybe Nothing = pure Nothing
 
 stateRegex :: Regex
 stateRegex = unsafeRegex "^[a-zA-Z]{2}$" noFlags
+
+nonEmptyRegex :: Regex
+nonEmptyRegex = unsafeRegex "[^\\s]" noFlags

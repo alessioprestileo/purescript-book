@@ -105,7 +105,6 @@ main =
         stateTest "C" false
         stateTest "CAA" false
         stateTest "C3" false
-    {-  Move this block comment starting point to enable more tests
       suite "Exercise - nonEmptyRegex" do
         let
           nonEmptyTest str exp = test str do
@@ -118,6 +117,7 @@ main =
         nonEmptyTest "" false
         nonEmptyTest " " false
         nonEmptyTest "\t" false
+    {-  Move this block comment starting point to enable more tests
       suite "Exercise - validateAddressImproved" do
         test "Valid" do
           let
