@@ -3,10 +3,13 @@ module Test.MySolutions where
 import Prelude
 
 import Control.Apply (lift2)
+import Data.AddressBook (Address, address)
+import Data.AddressBook.Validation (Errors, matches)
 import Data.Maybe (Maybe(..))
 import Data.String.Regex (Regex)
 import Data.String.Regex.Flags (noFlags)
 import Data.String.Regex.Unsafe (unsafeRegex)
+import Data.Validation.Semigroup (V)
 
 addMaybe :: forall a. Semiring a => Maybe a -> Maybe a -> Maybe a
 addMaybe = lift2 add
@@ -41,3 +44,16 @@ stateRegex = unsafeRegex "^[a-zA-Z]{2}$" noFlags
 
 nonEmptyRegex :: Regex
 nonEmptyRegex = unsafeRegex "[^\\s]" noFlags
+
+validateAddressImproved :: Address -> V Errors Address
+validateAddressImproved addr =
+  address <$> matches "Street" nonEmptyRegex addr.street
+          <*> matches "City" nonEmptyRegex addr.city
+          <*> matches "State" stateRegex addr.state
+
+validateAddressImprovedAdo :: Address -> V Errors Address
+validateAddressImprovedAdo addr = ado
+  street <- matches "Street" nonEmptyRegex addr.street
+  city   <- matches "City" nonEmptyRegex addr.city
+  state  <- matches "State" stateRegex addr.state
+  in address street city state
