@@ -3,12 +3,15 @@ module Test.MySolutions where
 import Prelude
 
 import Control.Apply (lift2)
-import Data.AddressBook (Address, address)
+import Data.AddressBook (Address, PhoneType(..), address, phoneNumber)
 import Data.AddressBook.Validation (Errors, matches)
+import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..))
+import Data.Show.Generic (genericShow)
 import Data.String.Regex (Regex)
 import Data.String.Regex.Flags (noFlags)
 import Data.String.Regex.Unsafe (unsafeRegex)
+import Data.Traversable (foldMap, traverse)
 import Data.Validation.Semigroup (V)
 
 addMaybe :: forall a. Semiring a => Maybe a -> Maybe a -> Maybe a
@@ -57,3 +60,12 @@ validateAddressImprovedAdo addr = ado
   city   <- matches "City" nonEmptyRegex addr.city
   state  <- matches "State" stateRegex addr.state
   in address street city state
+
+data Tree a = Leaf | Branch (Tree a) a (Tree a)
+
+derive instance eqTree :: Eq a => Eq (Tree a)
+
+derive instance genericTree :: Generic (Tree a) _
+
+instance showTree :: Show a => Show (Tree a) where
+  show t = genericShow t
