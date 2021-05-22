@@ -148,7 +148,6 @@ main =
         test "Eq - Not Equal" do
           Assert.expectFailure "not equal"
             $ Assert.equal tree Leaf
-    {-  Move this block comment starting point to enable more tests
       let
         leaf :: forall a. a -> Tree a
         leaf x = Branch Leaf x Leaf
@@ -170,6 +169,7 @@ main =
           test "Foldable - foldMap" do
             Assert.equal "1234567"
               $ foldMap (\x -> show x) intTree
+    {-  Move this block comment starting point to enable more tests
         suite "Maybe side-effect" do
           test "Just - traverse" do
             Assert.equal (Just $ Branch (leaf 1) 2 (leaf 3))

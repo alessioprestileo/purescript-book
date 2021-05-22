@@ -11,7 +11,7 @@ import Data.Show.Generic (genericShow)
 import Data.String.Regex (Regex)
 import Data.String.Regex.Flags (noFlags)
 import Data.String.Regex.Unsafe (unsafeRegex)
-import Data.Traversable (foldMap, traverse)
+import Data.Traversable (class Foldable, class Traversable, foldMap, foldl, foldr, traverse)
 import Data.Validation.Semigroup (V)
 
 addMaybe :: forall a. Semiring a => Maybe a -> Maybe a -> Maybe a
@@ -69,3 +69,20 @@ derive instance genericTree :: Generic (Tree a) _
 
 instance showTree :: Show a => Show (Tree a) where
   show t = genericShow t
+
+instance functorTree :: Functor Tree where
+  map _ Leaf = Leaf
+  map f (Branch treeLeft a treeRight) = Branch (map f treeLeft) (f a) (map f treeRight)
+
+instance foldableTree :: Foldable Tree where
+  foldr _ acc Leaf = acc
+  foldr f acc (Branch treeLeft a treeRight) = foldr f (f a (foldr f acc treeRight)) treeLeft
+  foldl _ acc Leaf = acc
+  foldl f acc (Branch treeLeft a treeRight) = foldl f (f (foldl f acc treeLeft) a) treeRight
+  foldMap _ Leaf = mempty
+  foldMap f (Branch treeLeft a treeRight) = foldMap f treeLeft <> (f a) <> foldMap f treeRight
+
+instance traversableTree :: Traversable Tree where
+  traverse _ Leaf = pure Leaf
+  traverse f (Branch treeLeft a treeRight) = Branch <$> traverse f treeLeft <*> f a <*> traverse f treeRight
+  sequence = traverse identity
